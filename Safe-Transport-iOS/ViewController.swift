@@ -6,14 +6,55 @@
 //
 
 import UIKit
+import CoreLocation
+import WatchConnectivity
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, CLLocationManagerDelegate, WCSessionDelegate{
+    func sessionDidBecomeInactive(_ session: WCSession) {
+        
+    }
+    
+    func sessionDidDeactivate(_ session: WCSession) {
+        
+    }
+    
+    let locationManager = CLLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        startWatchConnectivitySession()
     }
-
-
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+            guard let location = locations.last else { return }
+            let lat = location.coordinate.latitude
+            let lon = location.coordinate.longitude
+            
+            // Sending location data to Apple Watch
+            if WCSession.default.isReachable {
+                let coordinates = ["lat": "\(lat)", "lon": "\(lon)"]
+                WCSession.default.sendMessage(coordinates, replyHandler: nil, errorHandler: { error in
+                    print("Failed to send data to watch: \(error.localizedDescription)")
+                })
+            }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+            print("Failed to get location: \(error.localizedDescription)")
+    }
+    
+    func startWatchConnectivitySession() {
+            if WCSession.isSupported() {
+                WCSession.default.delegate = self
+                WCSession.default.activate()
+            }
+    }
+    
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+            // Handle session activation completion if needed
+    }
 }
 
