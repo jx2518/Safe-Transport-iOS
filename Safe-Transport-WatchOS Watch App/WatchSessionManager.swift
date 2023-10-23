@@ -23,18 +23,20 @@ class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
     }
 
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-        if let lat = message["lat"] as? String {
-            latitude = "Latitude: \(lat)"
-        }
-
-        if let lon = message["lon"] as? String {
-            longitude = "Longitude: \(lon)"
-        }
-
-        // Handling received text
-        if let receivedText = message["text"] as? String {
-            // Use this receivedText to update the UI on the watch
-            self.receivedText = receivedText
+        DispatchQueue.main.async {
+            if let lat = message["lat"] as? String {
+                self.latitude = "Latitude: \(lat)"
+            }
+            
+            if let lon = message["lon"] as? String {
+                self.longitude = "Longitude: \(lon)"
+            }
+            
+            // Handling received text
+            if let receivedText = message["text"] as? String {
+                // Use this receivedText to update the UI on the watch
+                self.receivedText = receivedText
+            }
         }
     }
 
