@@ -2,6 +2,12 @@ import WatchConnectivity
 import SwiftUI
 
 class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
+    func sessionDidBecomeInactive(_ session: WCSession) {
+    }
+    
+    func sessionDidDeactivate(_ session: WCSession) {
+    }
+    
     static let shared = WatchSessionManager()
     
     @Published var latitude: String = "Latitude: --"

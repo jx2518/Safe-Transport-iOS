@@ -30,6 +30,7 @@
 		1D33AB592AE5CAD800AAA2E4 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D33AB572AE5CAD800AAA2E4 /* CoreLocation.framework */; };
 		1D33AB5A2AE5CAD800AAA2E4 /* CoreLocationUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D33AB582AE5CAD800AAA2E4 /* CoreLocationUI.framework */; };
 		1D33AB5C2AE5D6E800AAA2E4 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D33AB5B2AE5D6E800AAA2E4 /* WatchSessionManager.swift */; };
+		1DA562A92AE6439200CE6B33 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D33AB5B2AE5D6E800AAA2E4 /* WatchSessionManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -498,6 +499,7 @@
 				1D33AAF62AE5C94900AAA2E4 /* ViewController.swift in Sources */,
 				1D33AAF22AE5C94900AAA2E4 /* AppDelegate.swift in Sources */,
 				1D33AAF42AE5C94900AAA2E4 /* SceneDelegate.swift in Sources */,
+				1DA562A92AE6439200CE6B33 /* WatchSessionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
