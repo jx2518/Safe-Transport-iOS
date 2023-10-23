@@ -9,7 +9,18 @@ import UIKit
 import CoreLocation
 import WatchConnectivity
 
-class ViewController: UIViewController, CLLocationManagerDelegate, WCSessionDelegate{
+class ViewController: UIViewController, CLLocationManagerDelegate, WCSessionDelegate, UITextFieldDelegate{
+    @IBOutlet weak var inputTextField: UITextField!
+
+    @IBAction func sendTextToWatch(_ sender: Any) {
+        if WCSession.default.isReachable {
+            let textToSend = inputTextField.text ?? ""
+            WCSession.default.sendMessage(["text": textToSend], replyHandler: nil, errorHandler: nil)
+        }
+
+    }
+    
+    
     func sessionDidBecomeInactive(_ session: WCSession) {
         
     }
@@ -22,6 +33,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, WCSessionDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        inputTextField.delegate = self
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()

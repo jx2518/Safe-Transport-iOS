@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct Safe_Transport_WatchOS_Watch_AppApp: App {
+struct Safe_TRANSPORT_WatchOSApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

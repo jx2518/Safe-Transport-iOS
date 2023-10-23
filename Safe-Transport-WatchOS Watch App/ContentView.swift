@@ -12,15 +12,17 @@ struct ContentView: View {
     @ObservedObject var watchSessionManager = WatchSessionManager.shared
     
     var body: some View {
-            VStack(spacing: 10) {
-                Image(systemName: "globe")
-                    .imageScale(.large)
-                    .foregroundColor(.accentColor)
-                
-                Text(watchSessionManager.latitude)
-                Text(watchSessionManager.longitude)
+            NavigationView {
+                List {
+                    NavigationLink(destination: LocationView()) {
+                        Text("Show Location")
+                    }
+                    
+                    NavigationLink(destination: MessageView()) {
+                        Text("Show Message")
+                    }
+                }
             }
-            .padding()
     }
 }
 

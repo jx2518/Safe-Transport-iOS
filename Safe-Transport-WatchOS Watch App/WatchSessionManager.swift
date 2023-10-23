@@ -6,6 +6,8 @@ class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
     
     @Published var latitude: String = "Latitude: --"
     @Published var longitude: String = "Longitude: --"
+    @Published var receivedText: String = "Received text will appear here"
+
     
     override init() {
         super.init()
@@ -24,9 +26,16 @@ class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
         if let lat = message["lat"] as? String {
             latitude = "Latitude: \(lat)"
         }
-        
+
         if let lon = message["lon"] as? String {
             longitude = "Longitude: \(lon)"
         }
+
+        // Handling received text
+        if let receivedText = message["text"] as? String {
+            // Use this receivedText to update the UI on the watch
+            self.receivedText = receivedText
+        }
     }
+
 }
