@@ -21,6 +21,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate, WCSessionDele
     }
     
     
+    @IBAction func sendAlertButtonPressed(_ sender: Any) {
+        if WCSession.default.isReachable {
+            WCSession.default.sendMessage(["alert": true], replyHandler: nil, errorHandler: nil)
+        }
+    }
+
+    
+    
+    
     func sessionDidBecomeInactive(_ session: WCSession) {
         
     }

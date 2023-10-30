@@ -1,4 +1,5 @@
 import WatchConnectivity
+import WatchKit
 import SwiftUI
 
 class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
@@ -11,11 +12,14 @@ class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
         
     }
     #endif
+    
     static let shared = WatchSessionManager()
     
     @Published var latitude: String = "Latitude: --"
     @Published var longitude: String = "Longitude: --"
     @Published var receivedText: String = "Received text will appear here"
+    @Published var shouldVibrate: Bool = false
+    @Published var showAlertView: Bool = false
 
     
     override init() {
@@ -43,10 +47,15 @@ class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
             
             // Handling received text
             if let receivedText = message["text"] as? String {
-                // Use this receivedText to update the UI on the watch
                 self.receivedText = receivedText
+            }
+            
+            // Handle vibration alert
+            if message["alert"] as? Bool == true {
+                // Make the watch vibrate
+                self.showAlertView = true
+                WKInterfaceDevice.current().play(.notification)
             }
         }
     }
-
 }
